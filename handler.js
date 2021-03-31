@@ -25,10 +25,10 @@ function manageDate(date = new Date(), format = "mm/dd/yyyy", lang = "en"){
 
   switch (format.toLowerCase()){
     case "mm/dd/yyyy":
-      return getCurrentMonth( date.getMonth() ) + "/" + date.getDate() + "/" + date.getFullYear();
-    /*case "dd/mm/yyyy":
-      return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-    case "mmm":
+      return getMonth( date.getMonth() ) + "/" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + date.getFullYear();
+    case "dd/mm/yyyy":
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + getMonth( date.getMonth() ) + "/" + date.getFullYear();
+    /*case "mmm":
       return getDateField( date, "monthshort" );
     case "dd mmm":
       return date.getDate() + " " + getDateField( date, "monthshort" );
@@ -56,7 +56,7 @@ function manageDate(date = new Date(), format = "mm/dd/yyyy", lang = "en"){
 }
 
 // Returns the months number. Date().getMonth() returns it from 0-11 which is wonky imo
-function getCurrentMonth(month){
+function getMonth(month){
   
   var months = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" ]
 
@@ -66,7 +66,7 @@ function getCurrentMonth(month){
 // Returns the months full name
 // By default it will be in english (second parameter) but I can add more languages in the future
 // Languages should be in ISO 2 letter language codes, upper or lowercase is irrelevant
-function getCurrentMonthLong(month, lang = "en"){
+function getMonthFull(month, lang = "en"){
   
   let months;
   switch (lang.toLowerCase()){
@@ -81,11 +81,30 @@ function getCurrentMonthLong(month, lang = "en"){
   return months[month]
 }
 
+// Returns the months short name (first 3 letters or recognizable variant)
+// By default it will be in english (second parameter) but I can add more languages in the future
+// Languages should be in ISO 2 letter language codes, upper or lowercase is irrelevant
+function getMonthShort(month, lang = "en"){
+  
+  let months;
+  switch (lang.toLowerCase()){
+    case "en":
+      months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      break;
+    case "es":
+      months = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ]
+      break;
+  }
+
+  return months[month]
+}
+
 
 let simpleDate = {
   manageDate,
-  getCurrentMonth,
-  getCurrentMonthLong,
+  getMonth,
+  getMonthFull,
+  getMonthShort
 };
 
 module.exports = simpleDate;
