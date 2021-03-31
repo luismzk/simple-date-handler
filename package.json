@@ -1,0 +1,28 @@
+{
+  "name": "simple-date-handler",
+  "version": "1.0.0",
+  "description": "Javascript date handler for mostly front end users to show information in various ways",
+  "main": "handler.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luismzk/simple-date-handler.git"
+  },
+  "keywords": [
+    "Date",
+    "javascript",
+    "handler",
+    "assist"
+  ],
+  "author": "Luis Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luismzk/simple-date-handler/issues"
+  },
+  "homepage": "https://github.com/luismzk/simple-date-handler#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
