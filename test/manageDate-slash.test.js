@@ -89,12 +89,60 @@ test("date should be 03/08/2022, with day and month left padded", () => {
 	expect( simpleDate.manageDate( date, "dd/mm/yyyy" ) ).toBe("03/08/2022");
 })
 
-// invalid date sent
-test("Invalid date was sent", () => {
-	expect( simpleDate.manageDate("b") ).toBe("INVALID DATE");
+// mm/dd/yy date tests
+test("date should be 11/15/15", () => {
+	date.setDate(15)
+	date.setMonth(10)
+	date.setYear(2015)
+	expect( simpleDate.manageDate( date, "mm/dd/yy" ) ).toBe("11/15/15");
 })
 
-// invalid date sent
-test("Invalid format sent", () => {
-	expect( simpleDate.manageDate(date, "bb/FFF") ).toBe("INVALID FORMAT");
+test("date should be 11/03/15, with day left padded", () => {
+	date.setDate(3)
+	date.setMonth(10)
+	date.setYear(2015)
+	expect( simpleDate.manageDate( date, "mm/dd/yy" ) ).toBe("11/03/15");
+})
+
+test("date should be 08/15/15, with month left padded", () => {
+	date.setDate(15)
+	date.setMonth(7)
+	date.setYear(2015)
+	expect( simpleDate.manageDate( date, "mm/dd/yy" ) ).toBe("08/15/15");
+})
+
+test("date should be 08/03/15, with day and month left padded", () => {
+	date.setDate(3)
+	date.setMonth(7)
+	date.setYear(2015)
+	expect( simpleDate.manageDate( date, "mm/dd/yy" ) ).toBe("08/03/15");
+})
+
+// dd/mm/yy date tests
+test("date should be 15/11/19", () => {
+	date.setDate(15)
+	date.setMonth(10)
+	date.setYear(2019)
+	expect( simpleDate.manageDate( date, "dd/mm/yy" ) ).toBe("15/11/19");
+})
+
+test("date should be 03/11/19, with day left padded", () => {
+	date.setDate(3)
+	date.setMonth(10)
+	date.setYear(2019)
+	expect( simpleDate.manageDate( date, "dd/mm/yy" ) ).toBe("03/11/19");
+})
+
+test("date should be 15/08/19, with month left padded", () => {
+	date.setDate(15)
+	date.setMonth(7)
+	date.setYear(2019)
+	expect( simpleDate.manageDate( date, "dd/mm/yy" ) ).toBe("15/08/19");
+})
+
+test("date should be 03/08/19, with day and month left padded", () => {
+	date.setDate(3)
+	date.setMonth(7)
+	date.setYear(2019)
+	expect( simpleDate.manageDate( date, "dd/mm/yy" ) ).toBe("03/08/19");
 })

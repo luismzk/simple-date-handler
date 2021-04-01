@@ -5,11 +5,12 @@
 
 // dd - day, left padded with 0
 // DD - full day in words
+// ddd - short day in words (3 letters)
 
 // mm - month in number, left padded with 0
 // MM - full month in words
-// mmm - short month (3 letters) in words, lowercase
-// MMM - short month (3 letters) in words, uppercase 
+// mmm - short month (3 letters) in words, first letter capitalized
+// MMM - short month (3 letters) in words, all uppercase 
 
 // yyyy - year, 4 digits
 // yy - year, 2 digits
@@ -23,17 +24,44 @@ function manageDate(date = new Date(), format = "mm/dd/yyyy", lang = "en"){
   if (date == "Invalid Date")
     return "INVALID DATE"
 
-  switch (format.toLowerCase()){
+  switch (format){
     case "mm/dd/yyyy":
       return getMonth( date.getMonth() ) + "/" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + date.getFullYear();
     case "dd/mm/yyyy":
       return (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + getMonth( date.getMonth() ) + "/" + date.getFullYear();
-    /*case "mmm":
-      return getDateField( date, "monthshort" );
-    case "dd mmm":
-      return date.getDate() + " " + getDateField( date, "monthshort" );
+    case "mm/dd/yy":
+      return getMonth( date.getMonth() ) + "/" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + date.getFullYear() % 100;
+    case "dd/mm/yy":
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + getMonth( date.getMonth() ) + "/" + date.getFullYear() % 100;
+    case "mm-dd-yyyy":
+      return getMonth( date.getMonth() ) + "-" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + date.getFullYear();
+    case "dd-mm-yyyy":
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + getMonth( date.getMonth() ) + "-" + date.getFullYear();
+    case "mm-dd-yy":
+      return getMonth( date.getMonth() ) + "-" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + date.getFullYear() % 100;
+    case "dd-mm-yy":
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + getMonth( date.getMonth() ) + "-" + date.getFullYear() % 100;
+    case "mmddyyyy":
+      return getMonth( date.getMonth() ) + String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + String( date.getFullYear() );
+    case "ddmmyyyy":
+      return String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + getMonth( date.getMonth() ) + String (date.getFullYear() );
+    case "mmddyy":
+      return getMonth( date.getMonth() ) + String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + String( date.getFullYear() % 100 );
+    case "ddmmyy":
+      return String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + getMonth( date.getMonth() ) + String( date.getFullYear() % 100 );
     case "mmm dd, yyyy":
-      return getDateField( date, "monthshort" ) + " " + date.getDate() + ", " + date.getFullYear();
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
+    case "mmm dd yyyy":
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + date.getFullYear();
+    case "mmm dd":
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate();
+    case "MMM dd, yyyy":
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
+    case "MMM dd yyyy":
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + date.getFullYear();
+    case "MMM dd":
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate();
+    /*
     case "12h":
       let hours = date.getHours() - 12
 
@@ -48,7 +76,8 @@ function manageDate(date = new Date(), format = "mm/dd/yyyy", lang = "en"){
 
       return hours + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + " " + meridian;
     case "24h":
-      return date.getHours() + ":" + date.getMinutes();*/
+      return date.getHours() + ":" + date.getMinutes();
+      */
     default:
       return "INVALID FORMAT"
   }
