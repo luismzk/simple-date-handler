@@ -26,63 +26,49 @@ function manageDate(date = new Date(), format = "mm/dd/yyyy", lang = "en"){
 
   // example date: October 15, 2021
   switch (format){
-    case "mm":
-      return getMonth( date.getMonth() );
-    case "MM":
-      return getMonthFull( date.getMonth(), lang );
-    case "mmm":
-      return getMonthShort( date.getMonth(), lang );
-    case "MMM":
-      return getMonthShort( date.getMonth(), lang ).toUpperCase();
-    case "dd":
-      return (date.getDate() < 10 ? '0' : '') + date.getDate();
-    case "yyyy":
-      return date.getFullYear();
-    case "yy":
-      return date.getFullYear() % 100;
     case "mm/dd/yyyy":     // 10/15/2021 - TESTED
-      return manageDate( date, "mm" ) + "/" + manageDate( date, "dd" ) + "/" + manageDate( date, "yyyy" );
+      return getMonth( date.getMonth() ) + "/" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + date.getFullYear();
     case "dd/mm/yyyy":    // 15/10/2021 - TESTED
-      return manageDate( date, "dd" ) + "/" + manageDate( date, "mm" ) + "/" + manageDate( date, "yyyy" );
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + getMonth( date.getMonth() ) + "/" + date.getFullYear();
     case "mm/dd/yy":      // 10/15/21 - TESTED
-      return manageDate( date, "mm" ) + "/" + manageDate( date, "dd" ) + "/" + manageDate( date, "yy" );
-    case "dd/mm/yy":      // 15/10/2021 - TESTED -- here
-      return manageDate( date, "dd" ) + "/" + manageDate( date, "mm" ) + "/" + manageDate( date, "yy" );
-    case "mm-dd-yyyy":     // 10-15-2021 - TESTED
-      return manageDate( date, "mm" ) + "-" + manageDate( date, "dd" ) + "-" + manageDate( date, "yyyy" );
+      return getMonth( date.getMonth() ) + "/" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + date.getFullYear() % 100;
+    case "dd/mm/yy":      // 15/10/2021 - TESTED
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "/" + getMonth( date.getMonth() ) + "/" + date.getFullYear() % 100;
+    case "mm-dd-yyyy":    // 10-15-2021 - TESTED
+      return getMonth( date.getMonth() ) + "-" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + date.getFullYear();
     case "dd-mm-yyyy":    // 15-10-2021 - TESTED
-      return manageDate( date, "dd" ) + "-" + manageDate( date, "mm" ) + "-" + manageDate( date, "yyyy" );
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + getMonth( date.getMonth() ) + "-" + date.getFullYear();
     case "mm-dd-yy":      // 10-15-21 - TESTED
-      return manageDate( date, "mm" ) + "-" + manageDate( date, "dd" ) + "-" + manageDate( date, "yy" );
-    case "dd-mm-yy":      // 15-10-2021 - TESTED -- here
-      return manageDate( date, "dd" ) + "-" + manageDate( date, "mm" ) + "-" + manageDate( date, "yy" );
+      return getMonth( date.getMonth() ) + "-" + (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + date.getFullYear() % 100;
+    case "dd-mm-yy":      // 15-10-21 - TESTED
+      return (date.getDate() < 10 ? '0' : '') + date.getDate() + "-" + getMonth( date.getMonth() ) + "-" + date.getFullYear() % 100;
     case "mmddyyyy":      // 10152021 - TESTED
-      return manageDate( date, "mm" ) + String( manageDate( date, "dd" ) ) + String( manageDate( date, "yyyy" ) );
-    case "ddmmyyyy":      // 10152021 - TESTED
-      return manageDate( date, "dd" ) + String( manageDate( date, "mm" ) ) + String( manageDate( date, "yyyy" ) );
-    case "mmddyy":      // 101521 - 
-      return manageDate( date, "mm" ) + String( manageDate( date, "dd" ) ) + String( manageDate( date, "yy" ) );
-    case "ddmmyy":      // 101521 - 
-      return manageDate( date, "dd" ) + String( manageDate( date, "mm" ) ) + String( manageDate( date, "yy" ) );
-    case "mmm dd, yyyy":  // Oct 15, 2021 - 
-      return manageDate( date, "mmm", lang ) + " " + manageDate( date, "dd" ) + ", " + manageDate( date, "yyyy" );
-    case "mmm dd yyyy":   // Oct 15 2021 - 
-      return manageDate( date, "mmm", lang ) + " " + manageDate( date, "dd" ) + " " + manageDate( date, "yyyy" );
-    case "mmm dd":        // Oct 15 - 
-      return manageDate( date, "mmm", lang ) + " " + manageDate( date, "dd" );
-    case "MMM dd, yyyy":  // OCT 15 2021 - 
-      return manageDate( date, "MMM", lang ) + " " + manageDate( date, "dd" ) + ", " + manageDate( date, "yyyy" );
-    case "MMM dd yyyy":   // OCT 15 2021 - 
-      return manageDate( date, "MMM", lang ) + " " + manageDate( date, "dd" ) + " " + manageDate( date, "yyyy" );
-    case "MMM dd":        // OCT 15 2021 - 
-      return manageDate( date, "MMM", lang ) + " " + manageDate( date, "dd" );
-    case "MM dd, yyyy":  // October 15 2021 - 
-      return manageDate( date, "MM", lang ) + " " + manageDate( date, "dd" ) + ", " + manageDate( date, "yyyy" );
-    case "MM dd yyyy":   // October 15 2021 - 
-      return manageDate( date, "MM", lang ) + " " + manageDate( date, "dd" ) + " " + manageDate( date, "yyyy" );
-    case "MM dd":        // October 15 2021 - 
-      return manageDate( date, "MM", lang ) + " " + manageDate( date, "dd" );
+      return getMonth( date.getMonth() ) + String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + String( date.getFullYear() );
+    case "ddmmyyyy":      // 15102021 - TESTED
+      return String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + getMonth( date.getMonth() ) + String (date.getFullYear() );
+    case "mmddyy":        // 101521 - TESTED
+      return getMonth( date.getMonth() ) + String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + String( date.getFullYear() % 100 );
+    case "ddmmyy":        // 151021 - TESTED
+      return String( (date.getDate() < 10 ? '0' : '') + date.getDate() ) + getMonth( date.getMonth() ) + String( date.getFullYear() % 100 );
+    case "mmm dd, yyyy":  // Oct 15, 2021 - TESTED
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
+    case "mmm dd yyyy":   // Oct 15 2021 - TESTED
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + date.getFullYear();
+    case "mmm dd":        // Oct 15 - TESTED
+      return getMonthShort( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate();
+    case "MMM dd, yyyy":  // OCT 15 2021 - TESTED
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
+    case "MMM dd yyyy":   // OCT 15 2021 - TESTED
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + date.getFullYear();
+    case "MMM dd":        // OCT 15 2021 - TESTED
+      return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate();
 
+    case "MM dd, yyyy":  // Oct 15, 2021 - 
+      return getMonthFull( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
+    case "MM dd yyyy":   // Oct 15 2021 - 
+      return getMonthFull( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + " " + date.getFullYear();
+    case "MM dd":        // Oct 15 - 
+      return getMonthFull( date.getMonth(), lang ) + " " + (date.getDate() < 10 ? '0' : '') + date.getDate();
     /*case "MMM dd, yyyy":  // OCT 15 2021 - 
       return getMonthShort( date.getMonth(), lang ).toUpperCase() + " " + (date.getDate() < 10 ? '0' : '') + date.getDate() + ", " + date.getFullYear();
     case "MMM dd yyyy":   // OCT 15 2021 - 
